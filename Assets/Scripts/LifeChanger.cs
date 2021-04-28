@@ -32,3 +32,4 @@ public class Life : MonoBehaviour
         _life.value = Mathf.MoveTowards(_life.value, _currentValue + _deltaLife, Time.deltaTime * _speed);
     }
 }
+

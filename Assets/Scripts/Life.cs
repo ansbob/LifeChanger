@@ -12,11 +12,15 @@ public class Life : MonoBehaviour
 
     private float _deltaLife = 10;
 
-    public void ChangeLifeValue(bool increase)
+    public void Increase()
     {
-        if (increase && _life < _maxValueLimiter)
+        if (_life < _maxValueLimiter)
             _life += _deltaLife;
-        else if (!increase && _life > _minValueLimiter)
+    }
+
+    public void Decrease()
+    {
+        if (_life > _minValueLimiter)
             _life -= _deltaLife;
     }
 }

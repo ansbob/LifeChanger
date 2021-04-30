@@ -5,31 +5,37 @@ using UnityEngine.UI;
 
 public class LifeIndicator : MonoBehaviour
 {
-    [SerializeField] private Slider _life;
+    [SerializeField] private Slider _lifeSlider;
+
+    private Life _life = new Life();
 
     private float _currentValue;
     private float _speed = 0.1f;
-    private float _deltaLife;
-
-    public void ChangeLifeValue(bool increase)
-    {
-        if (increase)
-            _deltaLife = 0.1f;
-        else
-            _deltaLife = -0.1f;
-
-        _currentValue = _life.value;
-    }
+    private float _deltaLife = 0.1f;
+    
 
     public void Awake()
     {
-        _deltaLife = 0;
-        _currentValue = _life.value;
+        _currentValue = _lifeSlider.value;
+    }
+
+    public void ChangeValue(bool increase)
+    {
+        if (increase)
+        {
+            _life.ChangeLifeValue(true);
+            _currentValue += _deltaLife;
+        }
+        else
+        {
+            _life.ChangeLifeValue(false);
+            _currentValue -= _deltaLife;
+        }
     }
 
     public void Update()
     {
-        if (_life.value != _currentValue + _deltaLife)
-            _life.value = Mathf.MoveTowards(_life.value, _currentValue + _deltaLife, Time.deltaTime * _speed);
+        if (_lifeSlider.value != _currentValue)
+            _lifeSlider.value = Mathf.MoveTowards(_lifeSlider.value, _currentValue, Time.deltaTime * _speed);
     }
 }

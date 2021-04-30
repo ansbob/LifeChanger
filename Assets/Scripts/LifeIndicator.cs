@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Life : MonoBehaviour
+public class LifeIndicator : MonoBehaviour
 {
     [SerializeField] private Slider _life;
 
@@ -11,7 +11,7 @@ public class Life : MonoBehaviour
     private float _speed = 0.1f;
     private float _deltaLife;
 
-    public void Change(bool increase)
+    public void ChangeLifeValue(bool increase)
     {
         if (increase)
             _deltaLife = 0.1f;
@@ -29,7 +29,7 @@ public class Life : MonoBehaviour
 
     public void Update()
     {
-        _life.value = Mathf.MoveTowards(_life.value, _currentValue + _deltaLife, Time.deltaTime * _speed);
+        if (_life.value != _currentValue + _deltaLife)
+            _life.value = Mathf.MoveTowards(_life.value, _currentValue + _deltaLife, Time.deltaTime * _speed);
     }
 }
-

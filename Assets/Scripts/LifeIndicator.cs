@@ -12,6 +12,9 @@ public class LifeIndicator : MonoBehaviour
     private float _currentValue;
     private float _speed = 0.1f;
     private float _deltaLife = 0.1f;
+
+    private float _maxLifeSliderValue = 1;
+    private float _minLifeSliderValue = 0.1f;
     
 
     public void Awake()
@@ -23,13 +26,17 @@ public class LifeIndicator : MonoBehaviour
     {
         if (increase)
         {
-            _life.ChangeLifeValue(true);
-            _currentValue += _deltaLife;
+            _life.Increase();
+
+            if (_currentValue < _maxLifeSliderValue)
+                _currentValue += _deltaLife;
         }
         else
         {
-            _life.ChangeLifeValue(false);
-            _currentValue -= _deltaLife;
+            _life.Decrease();
+
+            if (_currentValue > _minLifeSliderValue)
+                _currentValue -= _deltaLife;
         }
     }
 

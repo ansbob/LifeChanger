@@ -6,11 +6,10 @@ using UnityEngine.UI;
 public class Life : MonoBehaviour
 {
     private float _life = 50;
+    private float _deltaLife = 10;
 
     private const float _maxValueLimiter = 91;
     private const float _minValueLimiter = 9;
-
-    private float _deltaLife = 10;
 
     public void Increase()
     {

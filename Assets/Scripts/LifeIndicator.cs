@@ -7,16 +7,15 @@ public class LifeIndicator : MonoBehaviour
 {
     [SerializeField] private Slider _lifeSlider;
 
-    private Life _life = new Life();
-
     private float _currentValue;
     private float _speed = 0.1f;
     private float _deltaLife = 0.1f;
 
     private float _maxLifeSliderValue = 1;
     private float _minLifeSliderValue = 0.1f;
-    
 
+    private int _frames = 255;
+    
     public void Awake()
     {
         _currentValue = _lifeSlider.value;
@@ -26,23 +25,25 @@ public class LifeIndicator : MonoBehaviour
     {
         if (increase)
         {
-            _life.Increase();
-
             if (_currentValue < _maxLifeSliderValue)
                 _currentValue += _deltaLife;
         }
         else
         {
-            _life.Decrease();
-
             if (_currentValue > _minLifeSliderValue)
                 _currentValue -= _deltaLife;
         }
+
+        StartCoroutine(ChangeValue());
     }
 
-    public void Update()
+    public IEnumerator ChangeValue()
     {
-        if (_lifeSlider.value != _currentValue)
+        for (int i = 0; i < _frames; i++)
+        {
             _lifeSlider.value = Mathf.MoveTowards(_lifeSlider.value, _currentValue, Time.deltaTime * _speed);
+
+            yield return null;
+        }
     }
 }

@@ -9,35 +9,17 @@ public class LifeIndicator : MonoBehaviour
 
     private float _currentValue;
     private float _speed = 0.1f;
-    private float _deltaLife = 0.1f;
-
-    private float _maxLifeSliderValue = 1;
-    private float _minLifeSliderValue = 0.1f;
 
     private int _frames = 255;
-    
-    public void Awake()
+
+    public void ChangeValue()
     {
-        _currentValue = _lifeSlider.value;
+        _currentValue = Life.LifeValue / 100;
+
+        StartCoroutine(ChangeSliderValue());
     }
 
-    public void ChangeValue(bool increase)
-    {
-        if (increase)
-        {
-            if (_currentValue < _maxLifeSliderValue)
-                _currentValue += _deltaLife;
-        }
-        else
-        {
-            if (_currentValue > _minLifeSliderValue)
-                _currentValue -= _deltaLife;
-        }
-
-        StartCoroutine(ChangeValue());
-    }
-
-    public IEnumerator ChangeValue()
+    public IEnumerator ChangeSliderValue()
     {
         for (int i = 0; i < _frames; i++)
         {

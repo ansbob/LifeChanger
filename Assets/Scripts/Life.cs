@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class Life : MonoBehaviour
 {
-    public static float LifeValue => _life;
+    public float LifeValue => _life;
 
-    private static float _life = 50;
+    private float _life = 50;
     private float _deltaLife = 10;
 
     private const float _maxValueLimiter = 91;

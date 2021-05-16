@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(Life))]
 public class LifeIndicator : MonoBehaviour
 {
     [SerializeField] private Slider _lifeSlider;
@@ -13,21 +12,14 @@ public class LifeIndicator : MonoBehaviour
 
     private int _dividerForSlider = 100;
 
-    private Life _life;
-
-    private void Awake()
+    public void ChangeValue(Life life)
     {
-        _life = gameObject.GetComponent<Life>();
-    }
-
-    public void ChangeValue()
-    {
-        _currentValue = _life.LifeValue / _dividerForSlider;
+        _currentValue = life.LifeValue / _dividerForSlider;
 
         StartCoroutine(ChangeSliderValue());
     }
 
-    public IEnumerator ChangeSliderValue()
+    private IEnumerator ChangeSliderValue()
     {
         while (_lifeSlider.value != _currentValue)
         {

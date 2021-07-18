@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class Life : MonoBehaviour
 {
+    [SerializeField] private UnityEvent _changed;
+
     private float _life = 50;
     private float _deltaLife = 10;
 
@@ -13,15 +16,13 @@ public class Life : MonoBehaviour
 
     public float LifeValue => _life;
 
-    public void Increase()
+    public void Change(bool increase)
     {
-        if (_life < _maxValueLimiter)
+        if (increase && _life < _maxValueLimiter)
             _life += _deltaLife;
-    }
-
-    public void Decrease()
-    {
-        if (_life > _minValueLimiter)
+        else if (!increase && _life > _minValueLimiter)
             _life -= _deltaLife;
+
+        _changed?.Invoke();
     }
 }

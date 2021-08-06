@@ -12,9 +12,9 @@ public class LifeIndicator : MonoBehaviour
 
     private int _dividerForSlider = 100;
 
-    public void ChangeValue(Life life)
+    public void ChangeValue(float lifeValue)
     {
-        _currentValue = life.LifeValue / _dividerForSlider;
+        _currentValue = lifeValue / _dividerForSlider;
 
         StartCoroutine(ChangeSliderValue());
     }

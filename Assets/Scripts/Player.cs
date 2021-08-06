@@ -4,7 +4,13 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private Life _life;
+    [SerializeField] private LifeIndicator _lifeIndicator;
+    private Life _life = new Life();
+
+    private void Start()
+    {
+        _life.OnChanged += _lifeIndicator.ChangeValue;
+    }
 
     public void ChangeLife(bool increase)
     {
